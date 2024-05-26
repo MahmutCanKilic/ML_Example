@@ -4,7 +4,11 @@ import os
 from scipy import stats
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import MinMaxScaler
-print("selam can")
+from sklearn.metrics import accuracy_score, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
 data = pd.read_csv("/Users/salihcsr/Documents/GitHub/ML_Example/breast-cancer.csv")
 
 
@@ -77,17 +81,56 @@ def basari_hesapla(tahmin, gercek):
     return (t / len(tahmin)) * 100
 
 aday_k_lar = [1, 3, 5, 7, 9]
+best_k = None
+best_accuracy = 0
+
+validation_accuracies = []
 
 for k in aday_k_lar:
-    tahminler = np.zeros(val_X.shape[0])
+    tahminler = np.zeros(val_X.shape[0])  
     for i in range(val_X.shape[0]):
         ornek = val_X[i, :]
         uzakliklar = uzaklik_hesapla(ornek, egitim_X)
         yakindan_uzaga_indisler = np.argsort(uzakliklar)
-       
         mode_result = stats.mode(egitim_y[yakindan_uzaga_indisler[:k]])
-        
         mode_value = mode_result.mode[0] if isinstance(mode_result.mode, np.ndarray) else mode_result.mode
         tahminler[i] = mode_value
     basari = basari_hesapla(tahminler, val_y)
     print(f'k= {k} için doğrulama başarısı: {basari}')
+    validation_accuracies.append(basari)
+    if basari > best_accuracy:
+        best_accuracy = basari
+        best_k = k
+    
+print(f'En iyi k: {best_k} ile doğrulama başarısı: {best_accuracy}')
+
+plt.figure(figsize=(14, 6))  
+
+plt.subplot(1, 2, 1)
+plt.suptitle("Graphs")
+sns.barplot(x=aday_k_lar, y=validation_accuracies, palette="viridis")
+plt.title('Doğrulama Başarısı vs. K Değeri (Barplot)')
+plt.xlabel('K Değeri')
+plt.ylabel('Doğrulama Başarısı (%)')
+plt.grid(True)
+plt.ylim(80, 100)
+
+
+plt.subplot(1, 2, 2)
+plt.plot(aday_k_lar, validation_accuracies, marker='o')
+plt.title('Doğrulama Başarısı vs. K Değeri (Line Plot)')
+plt.xlabel('K Değeri')
+plt.ylabel('Doğrulama Başarısı (%)')
+plt.grid(True)
+plt.xticks(aday_k_lar)
+plt.tight_layout() 
+
+
+plt.show()
+
+
+
+
+
+
+
