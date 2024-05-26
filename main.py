@@ -3,6 +3,7 @@ import numpy as np
 import os
 from scipy import stats
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import MinMaxScaler
 print("selam can")
 data = pd.read_csv("/Users/salihcsr/Documents/GitHub/ML_Example/breast-cancer.csv")
 
@@ -55,6 +56,12 @@ print("********************")
 df = pd.DataFrame(data)
 print(df.dtypes)
 print("********************")
+
+
+scaler = MinMaxScaler()
+egitim_X = scaler.fit_transform(egitim_X)
+val_X = scaler.transform(val_X)
+test_X = scaler.transform(test_X)
 
 def uzaklik_hesapla(ornek, matris):
     uzakliklar = np.zeros(matris.shape[0])
