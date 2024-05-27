@@ -7,6 +7,9 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
+from flask import Flask, request, render_template
+
+main = Flask(__name__)
 
 
 data = pd.read_csv("/Users/salihcsr/Documents/GitHub/ML_Example/breast-cancer.csv")
@@ -14,8 +17,9 @@ data = pd.read_csv("/Users/salihcsr/Documents/GitHub/ML_Example/breast-cancer.cs
 
 data.info()
 print("----------------")
-print(data.describe())
+print(data.head(5))
 print("----------------")
+data = data.drop(columns=["id"])
 print(data.head(5))
 print("----------------")
 
@@ -80,29 +84,52 @@ def basari_hesapla(tahmin, gercek):
             t += 1
     return (t / len(tahmin)) * 100
 
-aday_k_lar = [1, 3, 5, 7, 9]
-best_k = None
-best_accuracy = 0
-
-validation_accuracies = []
-
-for k in aday_k_lar:
-    tahminler = np.zeros(val_X.shape[0])  
-    for i in range(val_X.shape[0]):
-        ornek = val_X[i, :]
+def knn_predict(egitim_X, egitim_y, test_X, k):
+    tahminler = np.zeros(test_X.shape[0])
+    for i in range(test_X.shape[0]):
+        ornek = test_X[i, :]
         uzakliklar = uzaklik_hesapla(ornek, egitim_X)
         yakindan_uzaga_indisler = np.argsort(uzakliklar)
         mode_result = stats.mode(egitim_y[yakindan_uzaga_indisler[:k]])
         mode_value = mode_result.mode[0] if isinstance(mode_result.mode, np.ndarray) else mode_result.mode
         tahminler[i] = mode_value
+    return tahminler
+
+aday_k_lar = [1, 3, 5, 7, 9]
+best_k = None
+best_accuracy = 0
+validation_accuracies = []
+
+for k in aday_k_lar:
+    tahminler = knn_predict(egitim_X, egitim_y, val_X, k)
     basari = basari_hesapla(tahminler, val_y)
     print(f'k= {k} için doğrulama başarısı: {basari}')
     validation_accuracies.append(basari)
     if basari > best_accuracy:
         best_accuracy = basari
         best_k = k
-    
+
 print(f'En iyi k: {best_k} ile doğrulama başarısı: {best_accuracy}')
+
+
+@main.route('/')
+def home():
+    return render_template('index.html')
+
+@main.route('/predict', methods=['POST'])
+def predict():
+    features = [float(x) for x in request.form.values()]
+    final_features = np.array(features).reshape(1, -1)
+    final_features = scaler.transform(final_features)
+    
+    tahminler = knn_predict(egitim_X, egitim_y, final_features, best_k)
+    mode_value = tahminler[0]
+    if mode_value == 1:
+        result = "Malignant"
+    else:
+        result = "Benign"
+
+    return render_template('index.html', prediction_text=f'Cancer Type Prediction: {result}')
 
 plt.figure(figsize=(14, 6))  
 
@@ -124,9 +151,16 @@ plt.ylabel('Doğrulama Başarısı (%)')
 plt.grid(True)
 plt.xticks(aday_k_lar)
 plt.tight_layout() 
-
+plt.pause(5)
 
 plt.show()
+
+if __name__ == "__main__":
+    main.run(debug=True, port= 5001)
+
+
+
+
 
 
 
