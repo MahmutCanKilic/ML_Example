@@ -1,0 +1,17 @@
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\Business.deps.json
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\Business.dll
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\Business.pdb
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\Data.dll
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\DataAccess.dll
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\DataAccess.pdb
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\bin\Debug\net5.0\Data.pdb
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.csproj.AssemblyReference.cache
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.AssemblyInfoInputs.cache
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.AssemblyInfo.cs
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.csproj.CoreCompileInputs.cache
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.csproj.CopyComplete
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.dll
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\refint\Business.dll
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\Business.pdb
+C:\Users\P2635\ML_Example\ML_WEB_API\Business\obj\Debug\net5.0\ref\Business.dll

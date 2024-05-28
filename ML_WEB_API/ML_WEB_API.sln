@@ -5,6 +5,12 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ML_WEB_API", "ML_WEB_API\ML_WEB_API.csproj", "{2EF0EE4D-C80E-4B97-8BFE-8BE5FE557A77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{3AF5A36F-3CE2-439D-B2BB-ACF363ED35FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{03E65348-4A37-427C-99D1-BCF4ED4EC7C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{541C4030-B6E9-41E8-AA1B-AF1AC9F16E7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{2EF0EE4D-C80E-4B97-8BFE-8BE5FE557A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EF0EE4D-C80E-4B97-8BFE-8BE5FE557A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EF0EE4D-C80E-4B97-8BFE-8BE5FE557A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF5A36F-3CE2-439D-B2BB-ACF363ED35FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF5A36F-3CE2-439D-B2BB-ACF363ED35FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF5A36F-3CE2-439D-B2BB-ACF363ED35FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF5A36F-3CE2-439D-B2BB-ACF363ED35FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E65348-4A37-427C-99D1-BCF4ED4EC7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E65348-4A37-427C-99D1-BCF4ED4EC7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E65348-4A37-427C-99D1-BCF4ED4EC7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E65348-4A37-427C-99D1-BCF4ED4EC7C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541C4030-B6E9-41E8-AA1B-AF1AC9F16E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541C4030-B6E9-41E8-AA1B-AF1AC9F16E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541C4030-B6E9-41E8-AA1B-AF1AC9F16E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541C4030-B6E9-41E8-AA1B-AF1AC9F16E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

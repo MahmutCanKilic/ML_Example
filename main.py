@@ -11,10 +11,17 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.inspection import permutation_importance
 from flask import Flask, request, render_template
+import requests
+from io import StringIO
 
 main = Flask(__name__)
 
-data = pd.read_csv("/uygulama/breast-cancer.csv")
+
+url = "http://localhost:5002/GetDatas"
+response = requests.get(url)
+csv_string = response.text
+
+data = pd.read_csv(StringIO(csv_string))
 
 data = data.drop(columns=["id"])
 
@@ -96,11 +103,9 @@ for k in aday_k_lar:
 
 print(f'En iyi k (KNN): {best_k} ile doğrulama başarısı: {best_accuracy}')
 
-
 naive_bayes_predictions = naive_bayes_predict(egitim_X, egitim_y, val_X)
 naive_bayes_accuracy = accuracy_score(val_y, naive_bayes_predictions)
 print(f'Naive Bayes doğrulama başarısı: {naive_bayes_accuracy}')
-
 
 logistic_regression_predictions = logistic_regression_predict(egitim_X, egitim_y, val_X)
 logistic_regression_accuracy = accuracy_score(val_y, logistic_regression_predictions)
@@ -126,12 +131,13 @@ def predict():
     tahminler = knn_predict(egitim_X, egitim_y, final_features, best_k)
     mode_value = tahminler[0]
     if mode_value == 1:
-        result = "Malignant"
+        result = "Malignant"#Kötü huylu
     else:
-        result = "Benign"
+        result = "Benign"#İyi huylu
         
     return render_template('index.html', prediction_text=f'Cancer Type Prediction: {result}')    
-
+if __name__ == "__main__":
+    main.run(debug=True, port=5001)
 plt.figure(figsize=(8, 6))
 plt.barh(feature_names, feature_importance, color='lightblue')
 plt.xlabel('Permütasyon Önemi')
@@ -151,15 +157,13 @@ plt.ylabel('Doğrulama Başarısı (%)')
 plt.grid(True)
 plt.ylim(80, 100)
 
-
 plt.subplot(1, 3, 2)
 plt.bar(['Naive Bayes'], [naive_bayes_accuracy * 100], color='skyblue')
 plt.title('Naive Bayes Doğrulama Başarısı')
 plt.xlabel('Model')
 plt.ylabel('Doğrulama Başarısı (%)')
-plt.grid(True)
 plt.ylim(80, 100)
-
+plt.grid(True)
 
 plt.subplot(1, 3, 3)
 plt.bar(['Lojistik Regresyon'], [logistic_regression_accuracy * 100], color='salmon')
@@ -172,5 +176,5 @@ plt.ylim(80, 100)
 plt.tight_layout() 
 plt.show()
 
-if __name__ == "__main__":
-    main.run(debug=True, port=5001)
+
+    
