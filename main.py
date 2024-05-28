@@ -14,7 +14,7 @@ from flask import Flask, request, render_template
 
 main = Flask(__name__)
 
-data = pd.read_csv("C:/Users/kilic/OneDrive/Belgeler/GitHub/ML_Example/breast-cancer.csv")
+data = pd.read_csv("/uygulama/breast-cancer.csv")
 
 data = data.drop(columns=["id"])
 

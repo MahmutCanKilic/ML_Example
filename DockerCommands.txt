@@ -1,0 +1,2 @@
+docker build -t ml-example -f "C:\Users\P2635\ML_Example\Deployment\Dockerfile.txt" "C:\Users\P2635\ML_Example"
+docker run -d -v C:/Users/P2635/ML_Example:/uygulama ml-example

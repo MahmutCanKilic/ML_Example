@@ -1,2 +1,0 @@
-docker build -t breast-cancer-app .
-docker run -p 5001:5001 ml-example
